@@ -22,12 +22,20 @@ public class DayTwo extends DayTemplate {
         loadLevels();
 
         levels.forEach(level -> {
-            if (isSafeLevel(level)) {
+            if (isSafeLevel(level,0)) {
                 safeReports++;
             }
         });
 
         log("Part One: There are %d safe reports".formatted(safeReports));
+
+        safeReports = 0;
+        levels.forEach(level -> {
+            if (isSafeLevel(level,1)) {
+                safeReports++;
+            }
+        });
+        log("Part One: There are %d safe reports (with 0 or 1 error)".formatted(safeReports));
     }
 
     private void loadLevels() {
@@ -45,7 +53,7 @@ public class DayTwo extends DayTemplate {
 
     }
 
-    private boolean isSafeLevel(Integer[] level) {
+    private boolean isSafeLevel(Integer[] level, int tolerateErrors) {
         var foundUnsafeAttributes = 0;
         var lastInt = -1;
         var mode = "";
@@ -80,7 +88,7 @@ public class DayTwo extends DayTemplate {
             lastInt = i;
         }
 
-        return foundUnsafeAttributes == 0;
+        return foundUnsafeAttributes <= tolerateErrors;
     }
 
 }
