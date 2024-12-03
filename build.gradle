@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+group = 'de.timsander.aoc'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:+'
+    annotationProcessor 'org.projectlombok:lombok:+'
+
+    // SLF4J with Logback
+    implementation 'ch.qos.logback:logback-classic:1.4.12'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
